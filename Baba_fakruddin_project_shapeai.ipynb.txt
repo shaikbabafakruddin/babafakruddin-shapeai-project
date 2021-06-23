@@ -1,0 +1,75 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Baba fakruddin project shapeai.ipynb",
+      "provenance": [],
+      "collapsed_sections": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "zZu0XFucC9q2"
+      },
+      "source": [
+        "          import requests\n",
+        " \n",
+        "         from datetime import datetime\n",
+        "    \n",
+        "               api_key='b6e58e86b25a513ac8c0f2dcbab9f603'\n",
+        "                \n",
+        "                 \n",
+        "                 location=input(\"Enter the city name:\")\n",
+        "                  \n",
+        "                  complete_api_link=\"https://api.openweathermap.org/data/2.5/weather?q=\"+location+\"&appid=\"+api_key\n",
+        "                   \n",
+        "                   api_link=requests.get(complete_api_link)\n",
+        "                   api_data=api_link.json()\n",
+        "                    \n",
+        "                    #create variables to store and display data\n",
+        "                    temp_city=((api_data['main']['temp'])-273.15)\n",
+        "                    weather_desc=api_data['weather'][0]['description']\n",
+        "                    hmdt=api_data['main']['humidity']\n",
+        "                    Wind_spd=api_data['wind']['speed']\n",
+        "                    date_time=datetime.now().strftime(\"%d %b %Y | %I:%M:%S %p\")\n",
+        "                     \n",
+        "                     print(\"-----------------------------------------------------\")\n",
+        "                     print(\"Weather Stats for - {} || {}\".format(location.upper(),date_time))\n",
+        "                     print(\"-----------------------------------------------------\")\n",
+        "                      \n",
+        "                       \n",
+        "                       print (\"Current temperature is : {:.2f} deg C\".format(temp_city))\n",
+        "                       print(\"Current weather desc :\",weather_desc)\n",
+        "                       print(\"current Humidity     :\",hmdt,'%')\n",
+        "                       print(\"Current wind speed   :\",Wind_spd,'kmph')\n",
+        "                        \n",
+        "                         \n",
+        "                          \n",
+        "                          text_file=open(\"weather_file.txt\",\"a+\")\n",
+        "                          text_file.write(\"\\ntemperature:\"+str(temp_city))\n",
+        "                          text_file.write(\"\\nweather_dec:\"+str(weather_desc))\n",
+        "                          text_file.write(\"\\nHumidity:\"+str(hmdt))\n",
+        "                          text_file.write(\"\\nwind_spd:\"+str(Wind_spd))\n",
+        "                          text_file.write(\"\\ndate_time:\"+str(date_time))\n",
+        "                           \n",
+        "                            \n",
+        "                            text_file.close()\n",
+        "                            text_file=open(\"weather_file.txt\",\"r\")\n",
+        "                            print(\"\\ndata from text file\\n\")\n",
+        "                            print(text_file.read())\n",
+        "                            print()\n",
+        "                            text_file.close()"
+      ]
+    }
+  ]
+}
